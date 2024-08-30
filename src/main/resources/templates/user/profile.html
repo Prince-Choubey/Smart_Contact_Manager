@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{base :: parent(~{::#content},~{::title},~{::script})}">
+
+<head>
+    <title data-th-text="${loggedInUser.name}+' | Smart Contact Manager'">Profile Page</title>
+
+</head>
+
+<body>
+
+    <div id="content">
+          <!-- user is logged in : side bar -->
+     <div th:if="${loggedInUser}">
+        <div data-th-replace="~{user/sidebar :: sidebar}"></div>
+     </div>
+    <div class="sm:pl-64 pt-20" >
+        <h1 class="text-2xl font-bold text-black text-center dark:text-white">Welcome to Profile page</h1>
+        <div class=" flex items-center mt-5  justify-center  flex-col">
+           
+            <div class="bg-white dark:bg-gray-800 p-6 mt-5 rounded-lg shadow-lg max-w-2xl w-full">
+                <div class="flex flex-col items-center">
+                    <img data-th-src="@{${loggedInUser.profilePic}}"  onerror="this.src='data:image/png;base64,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'" src="path/to/profilePic.jpg" alt="Profile Photo" class="w-44 h-44 rounded-full shadow-lg object-cover mb-4">
+                    <h2 class="text-2xl font-semibold mb-2" data-th-text=${loggedInUser.name}>User Name</h2>
+                    <p class="text-gray-500 mb-2" data-th-text="${loggedInUser.email}">user.email@example.com</p>
+                    <p class="text-gray-500 mb-2" data-th-text="${loggedInUser.phoneNumber}">123-456-7890</p>
+                    <p class="text-gray-500 mb-4 text-center" data-th-text="${loggedInUser.about}">About the user...</p>
+                    <div class="w-full flex justify-between">
+                        <p class="text-sm text-gray-500">Email Verified: <span class="font-medium text-gray-700" id="email-verified" data-th-text="${loggedInUser.emailVerified ? 'YES':'NO'}">No</span></p>
+                        <p class="text-sm text-gray-500">Phone Verified: <span class="font-medium text-gray-700" id="phone-verified" data-th-text="${loggedInUser.phoneVerified ? 'YES':'NO'}">No</span></p>
+                    </div>
+                </div>
+        </div>
+    </div>
+    <script>
+        console.log("this is profile page");
+    </script>
+
+    </div>
+</body>
+
+</html>
